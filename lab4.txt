@@ -1,0 +1,41 @@
+### --- CMPUT 404 Lab 4 --- ###
+### --- Eric Brisson --- ###
+
+# Question 1
+https://github.com/ericbrisson/cmput404-w2023-lab4
+
+# Question 2
+The browser shows you a page stating "The install worked successfully! Congratulations!". 
+
+# Question 3
+Navigating to / shows an error/404 page, as per the default behaviour of Django when you start to create views.
+At /polls, we see our Hello World message.
+
+# Question 4
+The process of migration takes a look at the INSTALLED_APPS setting and creates any necessary tables in databases for 
+the application to use.
+
+# Question 5
+You can see the authentication and authorization models -- particularly, Users and Groups, so for only for logging into
+this admin site.
+
+To add new models to the admin site, in admin.py for the relevant app, you just need to register the model -- using a line
+like admin.site.register(Question) (using the Question model from our tutorial, for example).
+
+# Question 6
+When you go to /polls/38/ in the browser, you see the sentence "You're looking at question 38."
+When you go to /polls/38/results in the browser, you see the sentence "You're looking at the results of question 38."
+When you go to /polls/38/vote in the browser, you see the sentence "You're voting on question 38."
+When you a string instead of number, you get a Page Not Found (404) -- because this route doesn't match any path we have setup in urls.py
+To fix this, you can replace the `int` in the dynamic path with `str`. So for example, `path('<str:question_id>/', views.detail, name='detail')`
+instead of `path('<int:question_id>/', views.detail, name='detail')`. The complete list of path converters can be found here:
+https://docs.djangoproject.com/en/4.1/topics/http/urls/#how-django-processes-a-request 
+
+# Question 7
+Your application can get quite large -- and if you hardcode URLs everywhere, and then decide to change one -- it be
+really hard to keep track of everywhere that URL was used and modify it accordingly. 
+
+# Question 8
+Generic views abstract out commonly used views on sites -- such as displaying details from a database -- and 
+can save you from reinventing the wheel, and keep your code minimal. You should use a generic view to save yourself from doing work you know need
+to in simple, common cases like this -- but you can stick to the hard way to develop a more highly customized solution.
